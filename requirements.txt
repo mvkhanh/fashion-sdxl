@@ -1,8 +1,8 @@
-streamlit==1.44.1
-torch==2.2.0
-diffusers==0.33.1
+streamlit
+torch
+diffusers
 Pillow
 numpy
-opencv-python==4.11.0
+opencv-python
 pandas
 selenium
