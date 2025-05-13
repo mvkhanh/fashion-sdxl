@@ -9,3 +9,4 @@ pillow
 pandas
 selenium
 streamlit
+huggingface_hub==0.19.4
