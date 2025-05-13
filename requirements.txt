@@ -1,12 +1,10 @@
-pip>=23.2
 numpy<2.0
-torch==2.1.0
-diffusers==0.25.0
-transformers>=4.36.2
-accelerate>=0.24.1
+torch
+diffusers
+transformers
+accelerate
 opencv-python
 pillow
 pandas
 selenium
 streamlit
-huggingface_hub==0.19.4
