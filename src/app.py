@@ -45,10 +45,12 @@ def main(type='sdxl'): # 'sdxl-control' for SDXL with ControlNet
         neg_prompt = st.text_input('Negative prompt:', placeholder="Type what you don't want to see in the image.")
     global steps
     steps = st.slider(label='Number of steps:', min_value=1, max_value=50, value=20, help='More steps typically improve image quality but also increase processing time.')
-    col1, col2 = st.columns(2)
+    col1, col2, col3 = st.columns(3)
     size = col1.selectbox(label='Width x Height (px):', options=[1024, 768, 512])
     image_nums = col2.radio(label='Number of images:', options=[1, 2, 3], horizontal=True)
+    seed = col3.number_input(label='Seed', min_value=-1, value=-1, step=1, help='-1 is random, set >= 0 for reproducibility')
     guidance = st.slider(label='Guidance scale:', min_value=1.0, max_value=20.0, step=0.1, value=7.5, help='Higher guidance scale encourages to generate images that are closely linked to the text prompt, usually at the expense of lower image quality.')
+    
     if type == 'sdxl-control':
         file = st.file_uploader('Control image:', type=['jpg', 'jpeg', 'png'], help='An input guidance image for the model, such as a sketch, Canny edge map, or depth map.')
         
