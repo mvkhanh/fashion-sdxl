@@ -1,0 +1,8 @@
+streamlit
+torch
+diffusers
+Pillow
+numpy
+opencv-python
+pandas
+selenium
