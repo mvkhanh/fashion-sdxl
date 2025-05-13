@@ -7,6 +7,7 @@ from PIL import Image
 
 images = None
 controlnet_conditioning_scale = 0.5
+device = 'mps' if torch.backends.mps.is_available() else 'cuda' if torch.cuda.is_available() else 'cpu'
 
 @st.cache_resource
 def get_model(type='sdxl'): # 'sdxl-control for SDXL with ControlNet XS
@@ -25,7 +26,6 @@ def get_model(type='sdxl'): # 'sdxl-control for SDXL with ControlNet XS
     else:
         raise ValueError('Type not valid!')
     
-    device = 'mps' if torch.backends.mps.is_available() else 'cuda' if torch.cuda.is_available() else 'cpu'
     pipe.to(device)
     if device == 'cuda':
         pipe.enable_model_cpu_offload()
@@ -48,7 +48,7 @@ def main(type='sdxl'): # 'sdxl-control' for SDXL with ControlNet
     col1, col2, col3 = st.columns(3)
     size = col1.selectbox(label='Width x Height (px):', options=[1024, 768, 512])
     image_nums = col2.radio(label='Number of images:', options=[1, 2, 3], horizontal=True)
-    seed = col3.number_input(label='Seed', min_value=-1, value=-1, step=1, help='-1 is random, set >= 0 for reproducibility')
+    seed = col3.number_input(label='Seed', min_value=0, value=0, step=1, help='0 is random, set > 0 for reproducibility')
     guidance = st.slider(label='Guidance scale:', min_value=1.0, max_value=20.0, step=0.1, value=7.5, help='Higher guidance scale encourages to generate images that are closely linked to the text prompt, usually at the expense of lower image quality.')
     
     if type == 'sdxl-control':
@@ -64,15 +64,18 @@ def main(type='sdxl'): # 'sdxl-control' for SDXL with ControlNet
         else:
             global progress_bar
             progress_bar = st.progress(0, text="🔄 Initilize...")
-            
+            if seed > 0:
+                generator = torch.Generator(device=device).manual_seed(seed)
+            else:
+                generator = None
             pipe = get_model(type)
             if type == 'sdxl':
                 images = pipe(prompt, negative_prompt=neg_prompt, num_inference_steps=steps,
-                    width=size, height=size, num_images_per_prompt=image_nums, guidance_scale=guidance, callback_on_step_end=update_bar).images
+                    width=size, height=size, num_images_per_prompt=image_nums, guidance_scale=guidance, callback_on_step_end=update_bar, generator=generator).images
             elif type == 'sdxl-control':
                 control_image = make_canny(load_image(Image.open(file)))
                 images = pipe(prompt, negative_prompt=neg_prompt, num_inference_steps=steps,
-                    width=size, height=size, num_images_per_prompt=image_nums, guidance_scale=guidance, callback_on_step_end=update_bar, controlnet_conditioning_scale=controlnet_conditioning_scale, image=control_image).images
+                    width=size, height=size, num_images_per_prompt=image_nums, guidance_scale=guidance, callback_on_step_end=update_bar, controlnet_conditioning_scale=controlnet_conditioning_scale, image=control_image, generator=generator).images
             return images
     return None
 
