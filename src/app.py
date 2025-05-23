@@ -10,7 +10,7 @@ controlnet_conditioning_scale = 0.5
 device = 'mps' if torch.backends.mps.is_available() else 'cuda' if torch.cuda.is_available() else 'cpu'
 
 @st.cache_resource
-def get_model(type='sdxl'): # 'sdxl-control for SDXL with ControlNet XS
+def get_model(type='sdxl'): # 'sdxl-control' for SDXL with ControlNet XS
     vae = AutoencoderKL.from_pretrained("madebyollin/sdxl-vae-fp16-fix", torch_dtype=torch.float16)
     if type == 'sdxl':
         pipe = StableDiffusionXLPipeline.from_pretrained(
@@ -34,7 +34,6 @@ def get_model(type='sdxl'): # 'sdxl-control for SDXL with ControlNet XS
     
 def update_bar(self, step: int, timestep: int, callback_kwargs: dict):
     # Tính phần trăm tiến độ
-    global curr_img
     progress = (step + 1) / steps
     progress_bar.progress(progress, text=f"🔄 In progress {progress * 100:.0f}%")
     return {}
@@ -84,7 +83,7 @@ def show_images(images):
         return
     for i, img in enumerate(images):
         img.save(f'tmp{i+1}.png')
-    curr_img = 0
+        
     progress_bar.empty()
     st.success("✅ Success!")
     st.divider()
