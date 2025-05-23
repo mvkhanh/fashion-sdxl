@@ -53,7 +53,7 @@ streamlit run src/app.py
 ### 🧥 2. Text-to-Image Output
 **Prompt:**
 
-> A unisex bomber jacket made of premium suede material, in navy blue color, featuring an embroidered golden > phoenix design on the back, with ribbed cuffs and hem in black knitted fabric; modern style with a touch of > 90s retro, captured under professional studio lighting with a softly blurred background.
+> A unisex bomber jacket made of premium suede material, in navy blue color, featuring an embroidered golden phoenix design on the back, with ribbed cuffs and hem in black knitted fabric; modern style with a touch of  90s retro, captured under professional studio lighting with a softly blurred background.
 
 **Generated Image:**
 
