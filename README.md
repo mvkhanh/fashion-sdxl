@@ -21,7 +21,7 @@ This project focuses on fine-tuning **Stable Diffusion XL (SDXL)** on **fashion-
 ### 🌐 4. Streamlit App Demo
 - A user interface to input text prompts and generate fashion images.
 - Demonstrates the capabilities of the fine-tuned SDXL model.
-- Supports sketch + text to image generation using pretrained SDXL with ControlNet-Next-XS.
+- Supports sketch + text to image generation using pretrained SDXL with ControlNet-XS.
 ---
 
 ## 🚀 How to Run
@@ -53,7 +53,7 @@ streamlit run src/app.py
 ### 🧥 2. Text-to-Image Output
 **Prompt:**
 
-A unisex bomber jacket made of premium suede material, in navy blue color, featuring an embroidered golden phoenix design on the back, with ribbed cuffs and hem in black knitted fabric; modern style with a touch of 90s retro, captured under professional studio lighting with a softly blurred background.
+> A unisex bomber jacket made of premium suede material, in navy blue color, featuring an embroidered golden > phoenix design on the back, with ribbed cuffs and hem in black knitted fabric; modern style with a touch of > 90s retro, captured under professional studio lighting with a softly blurred background.
 
 **Generated Image:**
 
@@ -61,10 +61,10 @@ A unisex bomber jacket made of premium suede material, in navy blue color, featu
   <img src="assets/demo_bomber_jacket.png" alt="Bomber Jacket Output" width="400">
 </p>
 
-### ✏️ 3. Sketch + Text-to-Image (ControlNet-Next-XS)
+### ✏️ 3. Sketch + Text-to-Image (ControlNet-XS)
 **Prompt:**
 
-model with purple dress
+> model with purple dress
 
 **Input sketch:**
 <p align="center">
@@ -76,4 +76,4 @@ model with purple dress
 <p align="center">
   <img src="assets/sketch_output.png" alt="Sketch Output" width="400">
 </p>
-⚙️ This feature uses pretrained SDXL + ControlNet-Next-XS, without fine-tuning.
+⚙️ This feature uses pretrained SDXL + ControlNet-XS, without fine-tuning.
