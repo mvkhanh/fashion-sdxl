@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# For preprocess download raw data
+# python3 preprocess.py
+# python3 download_data.py
+
 export HUGGINGFACE_HUB_TOKEN=<your_hf_token>
 export WANDB_API_KEY=<your_wandb_key>
 

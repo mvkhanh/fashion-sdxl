@@ -6,9 +6,12 @@ import requests
 from PIL import Image
 from transformers import Blip2Processor, Blip2ForConditionalGeneration
 
+# Lấy đường dẫn thư mục chứa file Python hiện tại
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 USING_BLIP = False
-data = pd.read_csv('clean_data.csv' if USING_BLIP else 'clean_data_no_blip.csv')
-IMAGE_FOLDER = 'data'
+data = pd.read_csv(os.path.join(BASE_DIR, 'clean_data.csv' if USING_BLIP else 'clean_data_no_blip.csv'))
+IMAGE_FOLDER = os.path.join(BASE_DIR, 'data')
 os.makedirs(IMAGE_FOLDER, exist_ok=True)
 
 if USING_BLIP:

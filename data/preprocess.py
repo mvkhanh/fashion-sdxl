@@ -2,8 +2,11 @@ import json
 import os
 import pandas as pd
 
+# Lấy đường dẫn thư mục chứa file Python hiện tại
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 USING_BLIP = False
-path = '../collect_data/raw_data.jsonl'
+path = os.path.join(BASE_DIR, '../collect_data/raw_data.jsonl')
 with open(path, 'r') as f:
     data = f.readlines()
 
@@ -81,7 +84,7 @@ with open(path, 'r') as f:
 with open(path, 'r') as f:
     data = f.readlines()
     
-DATA_FOLDER = '../data'
+DATA_FOLDER = os.path.join(BASE_DIR, '../data')
 os.makedirs(DATA_FOLDER, exist_ok=True)
 
 clean_data_path = os.path.join(DATA_FOLDER, 'clean_data.csv' if USING_BLIP else 'clean_data_no_blip.csv')
